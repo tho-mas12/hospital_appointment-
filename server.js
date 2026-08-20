@@ -37,6 +37,10 @@ if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
 // Sign-in and registration are the endpoints worth throttling.
 app.use("/api/auth", rateLimit({ windowMs: 15 * 60 * 1000, max: 40 }));
 
+app.get("/", (req, res) =>
+  res.json({ message: "Medicare Hospital Appointment API is running!", health: "/api/health" })
+);
+
 app.get("/api/health", (req, res) =>
   res.json({ status: "ok", time: new Date().toISOString() })
 );
